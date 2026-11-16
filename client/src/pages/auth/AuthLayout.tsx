@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { assetUrl } from '../../lib/asset';
 import { cx } from '../../lib/cx';
 import './Auth.css';
 
@@ -17,7 +18,7 @@ interface AuthLayoutProps {
 export function AuthLayout({ image, headline, subline, title, subtitle, mobileBrand = false, children }: AuthLayoutProps) {
   return (
     <div className={cx('auth', mobileBrand && 'auth--brand')}>
-      <div className="auth__photo" style={{ backgroundImage: `url(${image})` }} aria-hidden="true" />
+      <div className="auth__photo" style={{ backgroundImage: `url(${assetUrl(image)})` }} aria-hidden="true" />
       <div className="auth__hero" aria-hidden="true">
         <span className="auth__hero-brand">Lean Body Club</span>
         <div>

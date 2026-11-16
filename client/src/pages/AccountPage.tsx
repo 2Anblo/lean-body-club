@@ -9,6 +9,7 @@ import { PageHeader } from '../components/PageHeader';
 import { ProgressBar } from '../components/Progress';
 import { useAuth, useCurrentUser } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
+import { BASE_URL } from '../lib/asset';
 import { DAY_SHORT, formatClock, monthYear } from '../lib/dates';
 import { plural } from '../lib/people';
 import './AccountPage.css';
@@ -151,7 +152,7 @@ export default function AccountPage() {
           confirmLabel="Reset"
           onConfirm={async () => {
             await api.resetDemo?.();
-            window.location.assign('/');
+            window.location.assign(BASE_URL);
           }}
           onClose={() => setDialog(null)}
         />

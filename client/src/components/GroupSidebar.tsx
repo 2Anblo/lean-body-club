@@ -5,6 +5,7 @@ import { useData } from '../context/DataContext';
 import { useToast } from '../context/ToastContext';
 import { useApi } from '../hooks/useApi';
 import type { GroupDetail } from '../types';
+import { assetUrl } from '../lib/asset';
 import { ConfirmModal } from './AccountModals';
 import { Avatar } from './Avatar';
 import { ProgressBar } from './Progress';
@@ -40,7 +41,7 @@ export function GroupSidebar({ group, showPhoto = true }: Props) {
   return (
     <aside className="group-side" aria-label={`About ${group.name}`}>
       <section className="card group-side__card">
-        {showPhoto && <img className="group-side__photo" src={group.imageUrl} alt="" />}
+        {showPhoto && <img className="group-side__photo" src={assetUrl(group.imageUrl)} alt="" />}
         <h2 className="section-title">About</h2>
         <p className="group-side__desc">{group.description}</p>
         <dl className="stats">

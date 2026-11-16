@@ -58,6 +58,32 @@ Check-in, edit goal, edit profile and reminders open as dialogs (full-screen she
 | `npm run typecheck` | Type-check only |
 | `npm run preview` | Serve the production build locally |
 
-## Deploying the client
+## CI / CD (GitHub Actions)
+
+| Workflow | When | What |
+|---|---|---|
+| `.github/workflows/ci.yml` | Every push to `main` and every pull request | `npm ci` + type-checked build of the client |
+| `.github/workflows/deploy.yml` | Every push to `main` (or **Run workflow** by hand) | Builds the client and publishes it to GitHub Pages |
+
+**Live site:** https://2anblo.github.io/lean-body-club/
+
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+The site is served from `/lean-body-club/`, so:
+- the build runs with `--base=/<repo-name>/`;
+- the router uses Vite's `BASE_URL`, and images go through `assetUrl()` (`client/src/lib/asset.ts`);
+- `404.html` is a copy of `index.html`, so opening or refreshing a deep link like `/groups/g-morning-runners` still loads the app.
+
+### Pointing the live site at the real backend
+
+Until then, the live site runs on the in-browser demo data. Once the backend is deployed (e.g. on Render):
+
+1. Repo **Settings → Secrets and variables → Actions → Variables**, add:
+   - `VITE_API_MODE` = `http`
+   - `VITE_API_URL` = `https://<your-backend>/api`
+2. On the backend, allow CORS from `https://2anblo.github.io`.
+3. Re-run the **Deploy** workflow (or push to `main`).
+
+### Other hosts
 
 `npm run build` outputs a static site in `client/dist`. Because it is a single-page app, the host must send every unknown path to `index.html` (Netlify: `_redirects` with `/* /index.html 200`; Vercel and Render static sites: add a rewrite).

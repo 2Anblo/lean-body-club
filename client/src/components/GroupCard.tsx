@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Group } from '../types';
 import { useJoinGroup } from '../hooks/useJoinGroup';
+import { assetUrl } from '../lib/asset';
 import './GroupCard.css';
 
 /** Row card for a group. The whole card opens the group; "Join" joins without leaving the page. */
@@ -17,7 +18,7 @@ export function GroupCard({ group }: { group: Group }) {
 
   return (
     <article className="group-card">
-      <img className="group-card__thumb" src={group.imageUrl} alt="" loading="lazy" />
+      <img className="group-card__thumb" src={assetUrl(group.imageUrl)} alt="" loading="lazy" />
       <div className="group-card__info">
         <h3 className="group-card__name">
           <Link to={`/groups/${group.id}`} className="stretched-link">

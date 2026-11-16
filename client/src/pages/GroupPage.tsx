@@ -13,6 +13,7 @@ import { useUI } from '../context/UIContext';
 import { useApi } from '../hooks/useApi';
 import { useJoinGroup } from '../hooks/useJoinGroup';
 import type { GroupDetail } from '../types';
+import { assetUrl } from '../lib/asset';
 import './GroupPage.css';
 
 export default function GroupPage() {
@@ -68,7 +69,7 @@ export default function GroupPage() {
         />
         <div className="two-col">
           <div className="stack">
-            <img className="group-cover" src={group.imageUrl} alt={`${group.name}`} />
+            <img className="group-cover" src={assetUrl(group.imageUrl)} alt={group.name} />
             <div className="group-intro">
               <p className="meta">
                 {group.category} · {group.memberCount} members · {group.level}
