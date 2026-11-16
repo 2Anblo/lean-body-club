@@ -35,9 +35,14 @@
   --shadow-pop: 0 16px 40px rgba(0, 0, 0, 0.2);
   --shadow-toast: 0 6px 16px rgba(0, 0, 0, 0.18);
 
-  /* Layout */
+  /* Layout
+   * < 1024px   phones & tablets: bottom tab bar, one column
+   * ≥ 1024px   sidebar, one centered column
+   * ≥ 1200px   sidebar, main column + right column
+   */
   --sidebar-width: 248px;
   --bottom-nav-height: 72px;
   --page-pad: 24px;
-  --right-col: 360px;
+  --right-col: clamp(300px, 26vw, 380px);
+  --content-max: 1320px;
 }

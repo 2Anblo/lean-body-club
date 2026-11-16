@@ -5,12 +5,15 @@ import { Button, LinkButton } from '../components/Button';
 import { CheckInCard } from '../components/CheckInCard';
 import { EmptyState } from '../components/EmptyState';
 import { GroupCard } from '../components/GroupCard';
+import { Icon } from '../components/Icon';
+import { ProgressBar } from '../components/Progress';
 import { WeeklyGoalCard } from '../components/WeeklyGoalCard';
 import { useCurrentUser } from '../context/AuthContext';
 import { useUI } from '../context/UIContext';
 import { useApi } from '../hooks/useApi';
+import { cx } from '../lib/cx';
 import { longDate } from '../lib/dates';
-import { firstName } from '../lib/people';
+import { firstName, plural } from '../lib/people';
 import './HomePage.css';
 
 export default function HomePage() {
@@ -89,7 +92,7 @@ export default function HomePage() {
           )}
         </div>
 
-        {feed.data && feed.data.length > 0 && (
+        {feed.data && feed.data.length > 0 ? (
           <section className="home__recent stack-sm" aria-labelledby="recent">
             <h2 id="recent" className="section-title">
               Recent in your groups
@@ -100,8 +103,95 @@ export default function HomePage() {
               ))}
             </div>
           </section>
+        ) : (
+          feed.data &&
+          week.data &&
+          groups.data && (
+            <GettingStarted
+              joined={myGroups.length > 0}
+              logged={week.data.count > 0}
+              reached={goalReached}
+              goal={week.data.goal}
+              onLog={() => openCheckIn()}
+            />
+          )
         )}
       </div>
     </div>
+  );
+}
+
+interface GettingStartedProps {
+  joined: boolean;
+  logged: boolean;
+  reached: boolean;
+  goal: number;
+  onLog(): void;
+}
+
+/** Shown until the user has a group feed: the three things to do first. */
+function GettingStarted({ joined, logged, reached, goal, onLog }: GettingStartedProps) {
+  const steps = [
+    {
+      done: joined,
+      title: 'Join a group',
+      text: 'Pick a small group that trains like you.',
+      action: (
+        <Link to="/groups" className="text-link">
+          Browse groups
+        </Link>
+      ),
+    },
+    {
+      done: logged,
+      title: 'Log a workout',
+      text: 'Any activity counts — even a 15-minute walk.',
+      action: (
+        <button type="button" className="text-link" onClick={onLog}>
+          Check in
+        </button>
+      ),
+    },
+    {
+      done: reached,
+      title: 'Hit your weekly goal',
+      text: `${plural(goal, 'workout')} this week.`,
+      action: (
+        <Link to="/progress" className="text-link">
+          See progress
+        </Link>
+      ),
+    },
+  ];
+  const doneCount = steps.filter((s) => s.done).length;
+  if (doneCount === steps.length) return null;
+
+  return (
+    <section className="home__recent card getting-started" aria-labelledby="get-started">
+      <div className="row-between">
+        <h2 id="get-started" className="section-title">
+          Get started
+        </h2>
+        <span className="meta">{doneCount} of 3 done</span>
+      </div>
+      <ProgressBar value={doneCount} max={steps.length} label="Getting started progress" />
+      <ol className="steps">
+        {steps.map((s, i) => (
+          <li key={s.title} className={cx('step', s.done && 'step--done')}>
+            <span className="step__mark" aria-hidden="true">
+              {s.done ? <Icon name="check" size={16} /> : i + 1}
+            </span>
+            <div className="step__body">
+              <p className="step__title">
+                {s.title}
+                {s.done && <span className="sr-only"> (done)</span>}
+              </p>
+              <p className="step__text">{s.text}</p>
+              {!s.done && s.action}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }

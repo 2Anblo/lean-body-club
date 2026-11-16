@@ -90,7 +90,7 @@
   font-weight: 500;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .progress-grid {
     grid-template-columns: var(--right-col) minmax(0, 1fr);
     grid-template-areas:

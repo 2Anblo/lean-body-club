@@ -29,17 +29,11 @@
   font-size: 15px;
 }
 
+/* Chips wrap instead of scrolling, so every filter is always visible. */
 .filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  margin: 0 calc(-1 * var(--page-pad));
-  padding: 2px var(--page-pad);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.filters::-webkit-scrollbar {
-  display: none;
 }
 
 .group-grid {
@@ -48,10 +42,18 @@
   gap: 12px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+  .group-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
   .groups-page__controls {
     flex-direction: row;
     align-items: center;
+    gap: 16px;
   }
 
   .search {
@@ -59,12 +61,6 @@
   }
 
   .filters {
-    margin: 0;
-    padding: 2px;
-  }
-
-  .group-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    flex: 1;
   }
 }

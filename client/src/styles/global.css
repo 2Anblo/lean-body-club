@@ -253,13 +253,15 @@ ol {
     padding: 20px;
   }
 
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
   .two-col {
     grid-template-columns: minmax(0, 1fr) var(--right-col);
     gap: 32px;
-  }
-
-  .hide-desktop {
-    display: none !important;
   }
 }
 

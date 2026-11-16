@@ -48,18 +48,24 @@
   font-weight: 600;
 }
 
+/* Up to two lines, then an ellipsis — never cut mid-word on one line. */
 .group-card__line {
+  display: -webkit-box;
+  margin-top: 2px;
   overflow: hidden;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .group-card__action {
   position: relative;
   z-index: 1;
+  flex: none;
 }
 
 .group-card__action:disabled {

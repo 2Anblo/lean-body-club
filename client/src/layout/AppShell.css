@@ -170,9 +170,16 @@
     grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   }
 
+  /* One centered column until there is room for two. */
   .shell__main {
-    max-width: 1200px;
-    margin: 0;
+    max-width: 840px;
+    padding: 40px 40px 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shell__main {
+    max-width: var(--content-max);
     padding: 40px 48px 64px;
   }
 }
