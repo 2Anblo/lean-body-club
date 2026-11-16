@@ -1,0 +1,17 @@
+.boot {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.boot__brand {
+  font-family: var(--font-display);
+  font-size: 28px;
+  animation: boot-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes boot-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

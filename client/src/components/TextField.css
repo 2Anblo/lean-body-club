@@ -1,0 +1,71 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--field-label, var(--color-text));
+}
+
+.field__control {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 15px;
+}
+
+.field__control--area {
+  min-height: 96px;
+  padding: 14px 16px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.field__control::placeholder {
+  color: #8a8a8a;
+}
+
+.field__control:focus-visible {
+  outline: 2px solid var(--focus-color, var(--color-text));
+  outline-offset: 1px;
+}
+
+.field--error .field__control {
+  border-color: var(--danger, var(--color-danger));
+}
+
+.field--disabled .field__control {
+  background: var(--color-bg);
+  color: var(--color-muted);
+}
+
+.field__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.field__hint,
+.field__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--field-hint, var(--color-muted));
+}
+
+.field__count {
+  margin-left: auto;
+}
+
+.field__error {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--danger, var(--color-danger));
+}

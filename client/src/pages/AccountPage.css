@@ -1,0 +1,127 @@
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 20px;
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+
+.profile-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.profile-card__name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.profile-card__bio {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.settings {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: var(--radius-xl);
+}
+
+.settings__title {
+  padding: 12px 0 4px;
+}
+
+.settings li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.settings__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+.settings__row:hover .settings__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.settings__label {
+  flex: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.settings__value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.settings__value-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.settings__value svg {
+  flex: none;
+}
+
+.week-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+}
+
+.week-mini:hover {
+  border-color: #cfcfcc;
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: var(--radius-xl);
+}
+
+.account-page__reset {
+  align-self: center;
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .profile-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .profile-card__text {
+    flex: 1;
+  }
+}

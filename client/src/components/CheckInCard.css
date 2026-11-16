@@ -1,0 +1,118 @@
+.checkin-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.checkin-card--link {
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.checkin-card--link:hover {
+  border-color: #cfcfcc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.checkin-card--link:has(.stretched-link:focus-visible) {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.checkin-card .stretched-link:focus-visible {
+  outline: none;
+}
+
+.checkin-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkin-card__who {
+  min-width: 0;
+}
+
+.checkin-card__author {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkin-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tag--activity {
+  background: var(--color-primary-soft);
+}
+
+.checkin-card__text {
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.checkin-card__foot {
+  display: flex;
+  gap: 8px;
+}
+
+.react-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  margin-left: -8px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.react-btn + .react-btn {
+  margin-left: 4px;
+}
+
+.react-btn:hover:not(.react-btn--static) {
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+.react-btn--on {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.react-btn--on svg {
+  animation: like-pop 0.25s ease-out;
+}
+
+@keyframes like-pop {
+  50% {
+    transform: scale(1.25);
+  }
+}

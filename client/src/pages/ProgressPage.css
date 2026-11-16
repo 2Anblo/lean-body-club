@@ -1,0 +1,111 @@
+.progress-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  grid-template-areas:
+    'ring'
+    'chart'
+    'goal'
+    'history';
+}
+
+.ring-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px;
+  border-radius: var(--radius-xl);
+  text-align: center;
+  grid-area: ring;
+}
+
+.ring-card__title {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ring-card__text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: var(--radius-xl);
+  grid-area: chart;
+}
+
+.goal-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: var(--radius-xl);
+  grid-area: goal;
+}
+
+.goal-summary__value {
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  grid-area: history;
+}
+
+.history__list {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.history__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.history__row + .history__row {
+  border-top: 1px solid var(--color-border);
+}
+
+.history__activity {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.history__min {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .progress-grid {
+    grid-template-columns: var(--right-col) minmax(0, 1fr);
+    grid-template-areas:
+      'ring chart'
+      'goal history';
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .goal-summary {
+    align-items: flex-start;
+    align-self: start;
+  }
+
+  .history {
+    margin-top: 0;
+  }
+}

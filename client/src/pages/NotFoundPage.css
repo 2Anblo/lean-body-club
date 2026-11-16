@@ -1,0 +1,20 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.not-found__code {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 1;
+}
+
+.not-found__text {
+  color: var(--color-muted);
+}

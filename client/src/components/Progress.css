@@ -1,0 +1,116 @@
+.progress {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: var(--color-border);
+}
+
+.progress--dark {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.progress__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--color-primary);
+  transition: width 0.4s ease;
+}
+
+.progress--dark .progress__fill {
+  background: #ffffff;
+}
+
+.ring {
+  position: relative;
+  flex: none;
+}
+
+.ring svg {
+  display: block;
+}
+
+.ring__track,
+.ring__value {
+  fill: none;
+}
+
+.ring__track {
+  stroke: var(--color-border);
+}
+
+.ring__value {
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.ring__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring__num {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+}
+
+.chart__cols {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  height: 180px;
+}
+
+.chart__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.chart__value,
+.chart__day {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+  line-height: 16px;
+  min-height: 16px;
+}
+
+.chart__col--today .chart__day {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.chart__track {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+
+.chart__bar {
+  width: min(36px, 70%);
+  border-radius: 8px;
+  background: var(--color-primary);
+  transition: height 0.4s ease;
+}
+
+.chart__bar--empty {
+  background: var(--color-border);
+}
+
+@media (min-width: 1024px) {
+  .chart__cols {
+    height: 240px;
+  }
+}
