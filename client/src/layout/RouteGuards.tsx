@@ -22,10 +22,17 @@ export function RequireAuth() {
   return <Outlet />;
 }
 
-/** Sign-in and sign-up: skip them when already signed in. */
+/**
+ * Sign-in and sign-up: skip them when already signed in. Right after signing in
+ * this is what moves you on, so it goes back to the page that asked you to sign in.
+ */
 export function PublicOnly() {
   const { status } = useAuth();
+  const location = useLocation();
   if (status === 'loading') return <FullPageLoader />;
-  if (status === 'signedIn') return <Navigate to="/" replace />;
+  if (status === 'signedIn') {
+    const from = (location.state as { from?: string } | null)?.from;
+    return <Navigate to={from && from.startsWith('/') ? from : '/'} replace />;
+  }
   return <Outlet />;
 }
