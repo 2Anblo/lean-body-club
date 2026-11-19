@@ -32,4 +32,31 @@ jobs:
       - name: Type-check and build
         run: npm run build
 
-  # Add a "server" job here once the backend exists (install, lint, test).
+  server:
+    name: Server integration tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+
+      # The tests start their own in-memory MongoDB; cache its binary between runs.
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/.cache/mongodb-binaries
+          key: mongodb-binaries-${{ runner.os }}-${{ hashFiles('server/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+        env:
+          MONGOMS_DOWNLOAD_DIR: /home/runner/.cache/mongodb-binaries

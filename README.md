@@ -8,7 +8,7 @@ A community web app that helps college students build consistent fitness habits 
 
 ```
 client/   React + TypeScript + Vite frontend (done; runs on mock data today)
-server/   JavaScript backend + database (to do — see server/README.md)
+server/   Express + MongoDB API (auth, database, deploy done; group/check-in routes to do — see server/README.md)
 docs/     api.md: the REST contract the frontend expects
 ```
 
@@ -24,9 +24,19 @@ Open http://localhost:5173. Click **Use the demo account** on the sign-in page, 
 
 Until the backend exists, the client uses a **mock API** that stores everything in the browser's localStorage, with seed groups, people, check-ins and comments. Account → **Reset demo data** puts it back to the start.
 
+## Run the backend
+
+```bash
+cd server
+npm install
+npm run dev:memory
+```
+
+This starts the API on http://localhost:4000/api with an in-memory MongoDB and the same demo data as the mock. See [server/README.md](server/README.md) for a real database, tests and deployment.
+
 ## Switch to the real backend
 
-1. Start the server on port 4000 with the routes in [docs/api.md](docs/api.md).
+1. Start the server on port 4000 (above).
 2. Create `client/.env` with `VITE_API_MODE=http` (see `client/.env.example`).
 3. Restart `npm run dev`. Vite forwards `/api/*` to `http://localhost:4000`.
 
@@ -62,7 +72,7 @@ Check-in, edit goal, edit profile and reminders open as dialogs (full-screen she
 
 | Workflow | When | What |
 |---|---|---|
-| `.github/workflows/ci.yml` | Every push to `main` and every pull request | `npm ci` + type-checked build of the client |
+| `.github/workflows/ci.yml` | Every push to `main` and every pull request | Type-checked build of the client; server integration tests |
 | `.github/workflows/deploy.yml` | Every push to `main` (or **Run workflow** by hand) | Builds the client and publishes it to GitHub Pages |
 
 **Live site:** https://2anblo.github.io/lean-body-club/
@@ -76,12 +86,12 @@ The site is served from `/lean-body-club/`, so:
 
 ### Pointing the live site at the real backend
 
-Until then, the live site runs on the in-browser demo data. Once the backend is deployed (e.g. on Render):
+Until then, the live site runs on the in-browser demo data. Once the backend is deployed (Render + MongoDB Atlas via [`render.yaml`](render.yaml), see [server/README.md](server/README.md#deployment)):
 
 1. Repo **Settings → Secrets and variables → Actions → Variables**, add:
    - `VITE_API_MODE` = `http`
    - `VITE_API_URL` = `https://<your-backend>/api`
-2. On the backend, allow CORS from `https://2anblo.github.io`.
+2. On the backend, allow CORS from `https://2anblo.github.io` (`CORS_ORIGINS`, already set in `render.yaml`).
 3. Re-run the **Deploy** workflow (or push to `main`).
 
 ### Other hosts
